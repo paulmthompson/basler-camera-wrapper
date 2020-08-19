@@ -1,5 +1,7 @@
 #!/bin/sh
 
+#VAR=${1:-DEFAULTVALUE}
+
 g++ -c -fPIC -I/opt/pylon5/include ../../src/BaslerCpp.cpp -lpthread
 
 g++ -c -fPIC -I/opt/pylon5/include ../../src/BaslerCWrapper.cc -o BaslerCWrapper.o

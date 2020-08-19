@@ -9,7 +9,7 @@
 #include <mutex>
 #include <condition_variable>
 #ifdef _WIN32
-  #include <Windows.h>
+#include <Windows.h>
 #endif
 
 #include "basler_config.h"
@@ -27,41 +27,41 @@ int thread_counter = 0;
 MyCamera::MyCamera(int cam_n)
 {
 
-    attached = false;
-    acquisitionActive = false;
-    saveData=false;
-    frameRate = default_frame_rate;
-    saveFilePath = default_save_path;
-    saveFileName = default_save_name;
-    _h = 480;
-    _w = 640;
-    num_cam = cam_n;
-    buf_id[0]=0;
-    buf_id[1]=0;
+  attached = false;
+  acquisitionActive = false;
+  saveData=false;
+  frameRate = default_frame_rate;
+  saveFilePath = default_save_path;
+  saveFileName = default_save_name;
+  _h = 480;
+  _w = 640;
+  num_cam = cam_n;
+  buf_id[0]=0;
+  buf_id[1]=0;
 
-    offset = 0;
+  offset = 0;
+  
+  img_to_display = (char*)calloc(_h * _w * num_cam * bytes_per_pixel, sizeof(char));
+  leftover = (char*)calloc(_h * _w * num_cam * bytes_per_pixel, sizeof(char));
+  mydata = (char*)calloc(_h * _w * num_cam * frame_buf_size * bytes_per_pixel, sizeof(char));
 
-	img_to_display = (char*)calloc(_h * _w * num_cam * bytes_per_pixel, sizeof(char));
-	leftover = (char*)calloc(_h * _w * num_cam * bytes_per_pixel, sizeof(char));
-	mydata = (char*)calloc(_h * _w * num_cam * frame_buf_size * bytes_per_pixel, sizeof(char));
+  read_frame[0] = false;
+  read_frame[1] = false;
+  left_over_flag = false;
+  string file_path = __FILE__;
+  string dir_path = file_path.substr(0, file_path.rfind("/"));
 
-    read_frame[0] = false;
-    read_frame[1] = false;
-    left_over_flag = false;
-    string file_path = __FILE__;
-    string dir_path = file_path.substr(0, file_path.rfind("/"));
+  configFileName = default_camera_config_name;
+  std::cout << configFileName << std::endl;
+  framesGrabbed = false;
+  totalFramesSaved = 0;
 
-    configFileName = default_camera_config_name;
-    std::cout << configFileName << std::endl;
-    framesGrabbed = false;
-    totalFramesSaved = 0;
+  trialNum=0;
 
-    trialNum=0;
-
-#ifdef _WIN32
-	AllocConsole();
-	ShowWindow(GetConsoleWindow(), SW_HIDE);
-#endif
+  #ifdef _WIN32
+  AllocConsole();
+  ShowWindow(GetConsoleWindow(), SW_HIDE);
+  #endif
 }
 
 MyCamera::~MyCamera()
@@ -107,7 +107,7 @@ void MyCamera::Connect()
         //configuration parameters such as the desired sampling rate and exposure time
         std::cout << "Resulting Frame Rate " << camera[i].ResultingFrameRate.GetValue() << std::endl;
       } else {
-      std::cout << "Camera was not able to be initialized. Is one connected?" << std::endl;
+        std::cout << "Camera was not able to be initialized. Is one connected?" << std::endl;
       }
     }
   }
@@ -117,15 +117,15 @@ void MyCamera::StartAcquisition()
 {
   acquisitionActive=true;
   for (int i = 0; i < num_cam; i++) {
-	   camera[i].StartGrabbing();
-   }
+    camera[i].StartGrabbing();
+  }
 }
 
 void MyCamera::StopAcquisition()
 {
   acquisitionActive=false;
   for (int i = 0; i < num_cam; i++) {
-	   camera[i].StopGrabbing();
+    camera[i].StopGrabbing();
   }
 }
 
@@ -283,13 +283,13 @@ void MyCamera::mywrite(int write_dist, int start_pos,int thread_id)
 
 void MyCamera::resizeImage() {
 
-	free(img_to_display);
-	free(leftover);
-	free(mydata);
+  free(img_to_display);
+  free(leftover);
+  free(mydata);
 
-	img_to_display = (char*)calloc(_h * _w * num_cam * bytes_per_pixel, sizeof(char));
-	leftover = (char*)calloc(_h * _w * num_cam * bytes_per_pixel, sizeof(char));
-	mydata = (char*)calloc(_h * _w * num_cam * frame_buf_size * bytes_per_pixel, sizeof(char));
+  img_to_display = (char*)calloc(_h * _w * num_cam * bytes_per_pixel, sizeof(char));
+  leftover = (char*)calloc(_h * _w * num_cam * bytes_per_pixel, sizeof(char));
+  mydata = (char*)calloc(_h * _w * num_cam * frame_buf_size * bytes_per_pixel, sizeof(char));
 
 }
 
@@ -298,51 +298,51 @@ void MyCamera::StartFFMPEG()
   //If we are using a "trial structure" we should create a new directory with
   //The trial number specified
   if (trial_structure) {
-	  std::string dir_name = saveFilePath + "/" + std::to_string(trialNum);
-
-	#ifdef _WIN32
-	  CreateDirectoryA(dir_name.c_str(), NULL);
-	#else
-	  mkdir(dir_name.c_str());
-	#endif
-  }
-    char full_cmd[1000];
-    //Should have a configuration file or something to state location of ffmpeg along with
-    //other default parameters, and probably the location of the basler camera features
-
-    int len;
-
-	if (trial_structure) {
-		len = std::snprintf(full_cmd, sizeof(full_cmd), "%s %s %dx%d %s %s%s%d%s", ffmpeg_filepath, ffmpeg_options, _w, _h*num_cam, ffmpeg_cmd, saveFilePath.c_str(), "/", trialNum, "/%d.tif");
-	}
-	else {
-		len = std::snprintf(full_cmd, sizeof(full_cmd), "%s %s %dx%d %s %s%s", ffmpeg_filepath, ffmpeg_options, _h, _w*num_cam, ffmpeg_cmd, saveFilePath.c_str(), saveFileName.c_str());
-	}
+    std::string dir_name = saveFilePath + "/" + std::to_string(trialNum);
 
     #ifdef _WIN32
-      ffmpeg = _popen(full_cmd, "wb");
+    CreateDirectoryA(dir_name.c_str(), NULL);
     #else
-      ffmpeg = popen(full_cmd, "w");
+    mkdir(dir_name.c_str());
     #endif
-    if (ffmpeg == NULL) {
-      printf("Error opening file unexistent: %s\n", strerror(errno));
-    }
-    saveData = 1;
+  }
+  char full_cmd[1000];
+  //Should have a configuration file or something to state location of ffmpeg along with
+  //other default parameters, and probably the location of the basler camera features
+
+  int len;
+
+  if (trial_structure) {
+    len = std::snprintf(full_cmd, sizeof(full_cmd), "%s %s %dx%d %s %s%s%d%s", ffmpeg_filepath, ffmpeg_options, _w, _h*num_cam, ffmpeg_cmd, saveFilePath.c_str(), "/", trialNum, "/%d.tif");
+  }
+  else {
+    len = std::snprintf(full_cmd, sizeof(full_cmd), "%s %s %dx%d %s %s%s", ffmpeg_filepath, ffmpeg_options, _h, _w*num_cam, ffmpeg_cmd, saveFilePath.c_str(), saveFileName.c_str());
+  }
+
+  #ifdef _WIN32
+  ffmpeg = _popen(full_cmd, "wb");
+  #else
+  ffmpeg = popen(full_cmd, "w");
+  #endif
+  if (ffmpeg == NULL) {
+    printf("Error opening file unexistent: %s\n", strerror(errno));
+  }
+  saveData = 1;
 }
 
 void MyCamera::EndFFMPEG()
 {
   #ifdef _WIN32
-    _pclose(ffmpeg);
+  _pclose(ffmpeg);
   #else
-    pclose(ffmpeg);
+  pclose(ffmpeg);
   #endif
 
   //reset the number of total frames saved
   totalFramesSaved = 0;
   saveData = 0;
   if (trial_structure) {
-	  trialNum += 1;
+    trialNum += 1;
   }
 
 }
