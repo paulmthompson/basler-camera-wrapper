@@ -14,7 +14,7 @@ COPY src src
 
 RUN dpkg -i "$(ls pylon/*.deb)"
 
-ARG PYLON_VERSION=5.2
+ARG PYLON_VERSION=6.1
 
 RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
     && apt-get update && apt-get install \
