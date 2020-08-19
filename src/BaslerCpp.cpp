@@ -30,7 +30,6 @@ MyCamera::MyCamera(int cam_n)
   attached = false;
   acquisitionActive = false;
   saveData=false;
-  frameRate = default_frame_rate;
   saveFilePath = "./"
   saveFileName = "output.mp4";
   _h = 480;

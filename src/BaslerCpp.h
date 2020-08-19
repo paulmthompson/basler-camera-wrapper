@@ -32,7 +32,6 @@ public:
 
   bool attached;
   bool acquisitionActive;
-  float frameRate; //Estimate of frame rate currently being used
   std::string saveFilePath;
   std::string saveFileName;
   std::string configFileName;

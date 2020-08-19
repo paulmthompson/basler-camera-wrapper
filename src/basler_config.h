@@ -6,8 +6,6 @@
 static constexpr int MAX_CAMERA = 1;
 static constexpr int frame_buf_size = 100;
 
-static constexpr float default_frame_rate = 500.0;
-
 //static constexpr char ffmpeg_filepath[] = "ffmpeg";
 static constexpr char ffmpeg_filepath[] = "c:/Users/wanglab/Downloads/ffmpeg/bin/ffmpeg"; //intrinsic
 
