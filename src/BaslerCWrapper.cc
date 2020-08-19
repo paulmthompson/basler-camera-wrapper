@@ -66,6 +66,14 @@ extern "C" {
     cam->ChangeFFMPEG(path);
   }
 
+  void MyCamera_ChangeFFMPEGInputOptions(MyCamera* cam, const char *cmd) {
+    cam->ChangeFFMPEGInputOptions(cmd);
+  }
+
+  void MyCamera_ChangeFFMPEGOutputOptions(MyCamera* cam, const char *cmd) {
+    cam->ChangeFFMPEGOutputOptions(cmd);
+  }
+
   void deleteMyCamera(MyCamera* cam) {
     delete cam;
   }

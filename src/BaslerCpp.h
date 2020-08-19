@@ -30,6 +30,8 @@ public:
   void SetTrialStructure(int _structure);
   void ChangeCameraConfig(const char *path);
   void ChangeFFMPEG(const char *path);
+  void ChangeFFMPEGInputOptions(const char *cmd);
+  void ChangeFFMPEGOutputOptions(const char *cmd);
 
   bool attached;
   bool acquisitionActive;
@@ -37,6 +39,8 @@ public:
   std::string saveFileName;
   std::string configFileName;
   std::string ffmpegPath;
+  std::string ffmpegInputOptions;
+  std::string ffmpegOutputOptions;
   bool saveData;
 
   //This holds data coming in from the camera

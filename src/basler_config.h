@@ -6,12 +6,6 @@
 static constexpr int MAX_CAMERA = 1;
 static constexpr int frame_buf_size = 100;
 
-//static constexpr char ffmpeg_options[] = "-threads 4 -f rawvideo -pix_fmt gray -s";
-static constexpr char ffmpeg_options[] = "-f rawvideo -pix_fmt gray16 -s"; //intrinsic
-
-//static constexpr char ffmpeg_cmd[] = "-i - -y -pix_fmt nv12 -vcodec h264_nvenc";
-static constexpr char ffmpeg_cmd[] = "-i - -y -pix_fmt gray16 -compression_algo raw"; //intrinsic
-
 //static constexpr int bytes_per_pixel = 1;
 static constexpr int bytes_per_pixel = 2;
 

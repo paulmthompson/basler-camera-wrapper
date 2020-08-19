@@ -32,6 +32,8 @@ DLLOPT  void MyCamera_changeResolution(MyCamera* cam, int w, int h);
 DLLOPT  void MyCamera_SetTrialStructure(MyCamera* cam, int _structure);
 DLLOPT	void MyCamera_ChangeCameraConfig(MyCamera* cam, const char *path);
 DLLOPT	void MyCamera_ChangeFFMPEG(MyCamera* cam, const char *path);
+DLLOPT	void MyCamera_ChangeFFMPEGInputOptions(MyCamera* cam, const char *cmd);
+DLLOPT 	void MyCamera_ChangeFFMPEGOutputOptions(MyCamera* cam, const char *cmd);
 
 DLLOPT  void deleteMyCamera(MyCamera* cam);
 
