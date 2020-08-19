@@ -12,7 +12,7 @@ COPY pylon pylon
 COPY Build Build
 COPY src src
 
-RUN dpkg -i pylon/pylon_5.2.0.13457-deb0_amd64.deb
+RUN dpkg -i "$(ls pylon/*.deb)"
 
 ARG PYLON_VERSION=5.2
 
