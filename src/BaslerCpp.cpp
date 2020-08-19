@@ -37,6 +37,7 @@ MyCamera::MyCamera(int cam_n)
   ffmpegOutputOptions = "-i - -y -pix_fmt gray16 -compression_algo raw";
   _h = 480;
   _w = 640;
+  bytes_per_pixel = 1;
   num_cam = cam_n;
   buf_id[0]=0;
   buf_id[1]=0;
@@ -379,6 +380,10 @@ void MyCamera::ChangeFFMPEGInputOptions(const char *cmd) {
 
 void MyCamera::ChangeFFMPEGOutputOptions(const char *cmd) {
   ffmpegOutputOptions = cmd;
+}
+
+void MyCamera::ChangeBytes(int _bytes) {
+  bytes_per_pixel = _bytes;
 }
 
 void init_pylon()

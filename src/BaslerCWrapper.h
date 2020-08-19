@@ -34,6 +34,7 @@ DLLOPT	void MyCamera_ChangeCameraConfig(MyCamera* cam, const char *path);
 DLLOPT	void MyCamera_ChangeFFMPEG(MyCamera* cam, const char *path);
 DLLOPT	void MyCamera_ChangeFFMPEGInputOptions(MyCamera* cam, const char *cmd);
 DLLOPT 	void MyCamera_ChangeFFMPEGOutputOptions(MyCamera* cam, const char *cmd);
+DLLOPT 	void MyCamera_ChangeBytes(MyCamera* cam, int _bytes);
 
 DLLOPT  void deleteMyCamera(MyCamera* cam);
 

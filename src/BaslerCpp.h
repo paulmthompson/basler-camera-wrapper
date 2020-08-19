@@ -32,6 +32,7 @@ public:
   void ChangeFFMPEG(const char *path);
   void ChangeFFMPEGInputOptions(const char *cmd);
   void ChangeFFMPEGOutputOptions(const char *cmd);
+  void ChangeBytes(int _bytes);
 
   bool attached;
   bool acquisitionActive;
@@ -56,6 +57,7 @@ public:
   int totalFramesSaved;
   int _h;
   int _w;
+  int bytes_per_pixel;
   int num_cam;
 
   int trial_structure; //Flag if trial structure is being used
