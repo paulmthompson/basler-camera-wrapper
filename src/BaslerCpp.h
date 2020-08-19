@@ -24,7 +24,7 @@ public:
   void StartFFMPEG();
   void EndFFMPEG();
   void ChangeFolder(const char *folder);
-  void UpdateSaveName();
+  void UpdateSaveName(const char *name);
   void mywrite(int write_dist, int start_pos,int thread_id);
   void resizeImage();
   void SetTrialStructure(int _structure);
@@ -74,7 +74,7 @@ private:
   bool left_over_flag;
 
   //Indicates the starting index in the ring buffer
-  int offset
+  int offset;
 
   bool read_frame[MAX_CAMERA];
   int buf_id[MAX_CAMERA];

@@ -30,7 +30,7 @@ MyCamera::MyCamera(int cam_n)
   attached = false;
   acquisitionActive = false;
   saveData=false;
-  saveFilePath = "./"
+  saveFilePath = "./";
   saveFileName = "output.mp4";
   ffmpegPath = "ffmpeg";
   ffmpegInputOptions = "-f rawvideo -pix_fmt gray16 -s";

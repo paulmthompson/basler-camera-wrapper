@@ -74,7 +74,7 @@ extern "C" {
     cam->ChangeFFMPEGOutputOptions(cmd);
   }
 
-  void MyCamera_ChangeBytes(int _bytes) {
+  void MyCamera_ChangeBytes(MyCamera* cam, int _bytes) {
     cam->ChangeBytes(_bytes);
   }
 
