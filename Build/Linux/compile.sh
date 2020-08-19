@@ -1,9 +1,18 @@
-#!/bin/sh
+#!/bin/bash
 
-#VAR=${1:-DEFAULTVALUE}
+PYLON_VERSION=${1:-5.2}
 
 g++ -c -fPIC -I/opt/pylon5/include ../../src/BaslerCpp.cpp -lpthread
 
 g++ -c -fPIC -I/opt/pylon5/include ../../src/BaslerCWrapper.cc -o BaslerCWrapper.o
 
-g++ BaslerCpp.o BaslerCWrapper.o -shared -o BaslerCpp.so -Wl,--enable-new-dtags -Wl,-rpath,/opt/pylon5/lib64 -L/opt/pylon5/lib64 -Wl,-E -lpylonbase -lpylonutility -lGenApi_gcc_v3_1_Basler_pylon_v5_1 -lGCBase_gcc_v3_1_Basler_pylon_v5_1
+#For pylon 5.1 and 5.2
+if [ "$PYLON_VERSION" == "5.1" ] || [ "$PYLON_VERSION" == "5.2" ]; then
+  echo "$PYLON_VERSION"
+  PYLON_LIB="/opt/pylon5/lib64"
+  GEN_API="-lGenApi_gcc_v3_1_Basler_pylon_v5_1"
+  GEN_BASE="-lGCBase_gcc_v3_1_Basler_pylon_v5_1"
+else
+  echo "incompatible Pylon version!"
+fi
+g++ BaslerCpp.o BaslerCWrapper.o -shared -o BaslerCpp.so -Wl,--enable-new-dtags -Wl,-rpath,"$PYLON_LIB" -L"$PYLON_LIB" -Wl,-E -lpylonbase -lpylonutility "$GEN_API" "$GEN_BASE"
