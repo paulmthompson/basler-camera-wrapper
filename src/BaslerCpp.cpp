@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <iostream>
+#include <sys/stat.h>
 #include <pylon/PylonIncludes.h>
 #include <pylon/usb/BaslerUsbInstantCamera.h>
 #include <thread>
@@ -307,7 +308,7 @@ void MyCamera::StartFFMPEG()
     #ifdef _WIN32
     CreateDirectoryA(dir_name.c_str(), NULL);
     #else
-    mkdir(dir_name.c_str());
+    mkdir(dir_name.c_str(),S_IRWXU);
     #endif
   }
   char full_cmd[1000];
