@@ -1,3 +1,4 @@
 Build/Linux/BaslerCWrapper.o
 Build/Linux/BaslerCpp.o
 Build/Linux/BaslerCpp.so
+pylon/*.deb
