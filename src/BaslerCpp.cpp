@@ -57,6 +57,7 @@ MyCamera::MyCamera(int cam_n)
   totalFramesSaved = 0;
 
   trialNum=0;
+  trial_structure = 1;
 
   #ifdef _WIN32
   AllocConsole();
@@ -355,6 +356,11 @@ void MyCamera::ChangeFolder(const char *folder)
 void MyCamera::UpdateSaveName(const char *name)
 {
   saveFileName = name;
+}
+
+void MyCamera::SetTrialStructure(int _structure)
+{
+  trial_structure = _structure;
 }
 
 void init_pylon()

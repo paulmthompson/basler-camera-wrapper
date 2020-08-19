@@ -27,6 +27,7 @@ public:
   void UpdateSaveName();
   void mywrite(int write_dist, int start_pos,int thread_id);
   void resizeImage();
+  void SetTrialStructure(int _structure);
 
   bool attached;
   bool acquisitionActive;
@@ -50,6 +51,8 @@ public:
   int _h;
   int _w;
   int num_cam;
+
+  int trial_structure; //Flag if trial structure is being used
   int trialNum; //If a trial structure is being used
 
 private:

@@ -19,9 +19,6 @@ static constexpr char ffmpeg_options[] = "-f rawvideo -pix_fmt gray16 -s"; //int
 //static constexpr char ffmpeg_cmd[] = "-i - -y -pix_fmt nv12 -vcodec h264_nvenc";
 static constexpr char ffmpeg_cmd[] = "-i - -y -pix_fmt gray16 -compression_algo raw"; //intrinsic
 
-//static constexpr int trial_structure = 0;
-static constexpr int trial_structure = 1;
-
 //static constexpr int bytes_per_pixel = 1;
 static constexpr int bytes_per_pixel = 2;
 

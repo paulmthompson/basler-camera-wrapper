@@ -54,6 +54,10 @@ extern "C" {
 	cam->resizeImage();
   }
 
+  void MyCamera_SetTrialStructure(MyCamera* cam, int _structure) {
+    cam->SetTrialStructure(_structure);
+  }
+
   void deleteMyCamera(MyCamera* cam) {
     delete cam;
   }
