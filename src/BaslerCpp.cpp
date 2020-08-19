@@ -32,6 +32,7 @@ MyCamera::MyCamera(int cam_n)
   saveData=false;
   saveFilePath = "./"
   saveFileName = "output.mp4";
+  ffmpegPath = "ffmpeg";
   _h = 480;
   _w = 640;
   num_cam = cam_n;
@@ -313,10 +314,10 @@ void MyCamera::StartFFMPEG()
   int len;
 
   if (trial_structure) {
-    len = std::snprintf(full_cmd, sizeof(full_cmd), "%s %s %dx%d %s %s%s%d%s", ffmpeg_filepath, ffmpeg_options, _w, _h*num_cam, ffmpeg_cmd, saveFilePath.c_str(), "/", trialNum, "/%d.tif");
+    len = std::snprintf(full_cmd, sizeof(full_cmd), "%s %s %dx%d %s %s%s%d%s", ffmpegPath.c_str(), ffmpeg_options, _w, _h*num_cam, ffmpeg_cmd, saveFilePath.c_str(), "/", trialNum, "/%d.tif");
   }
   else {
-    len = std::snprintf(full_cmd, sizeof(full_cmd), "%s %s %dx%d %s %s%s", ffmpeg_filepath, ffmpeg_options, _h, _w*num_cam, ffmpeg_cmd, saveFilePath.c_str(), saveFileName.c_str());
+    len = std::snprintf(full_cmd, sizeof(full_cmd), "%s %s %dx%d %s %s%s", ffmpegPath.c_str(), ffmpeg_options, _h, _w*num_cam, ffmpeg_cmd, saveFilePath.c_str(), saveFileName.c_str());
   }
 
   #ifdef _WIN32
@@ -364,6 +365,10 @@ void MyCamera::SetTrialStructure(int _structure)
 
 void MyCamera::ChangeCameraConfig(const char *path) {
   configFileName = path;
+}
+
+void MyCamera::ChangeFFMPEG(const char *path) {
+  ffmpegPath = path;
 }
 
 void init_pylon()

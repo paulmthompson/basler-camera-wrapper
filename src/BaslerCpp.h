@@ -29,12 +29,14 @@ public:
   void resizeImage();
   void SetTrialStructure(int _structure);
   void ChangeCameraConfig(const char *path);
+  void ChangeFFMPEG(const char *path);
 
   bool attached;
   bool acquisitionActive;
   std::string saveFilePath;
   std::string saveFileName;
   std::string configFileName;
+  std::string ffmpegPath;
   bool saveData;
 
   //This holds data coming in from the camera
