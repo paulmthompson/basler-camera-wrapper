@@ -58,6 +58,10 @@ extern "C" {
     cam->SetTrialStructure(_structure);
   }
 
+  void MyCamera_ChangeCameraConfig(MyCamera* cam, const char *path) {
+    cam->ChangeCameraConfig(path);
+  }
+
   void deleteMyCamera(MyCamera* cam) {
     delete cam;
   }

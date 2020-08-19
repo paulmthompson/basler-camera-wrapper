@@ -51,7 +51,7 @@ MyCamera::MyCamera(int cam_n)
   string file_path = __FILE__;
   string dir_path = file_path.substr(0, file_path.rfind("/"));
 
-  configFileName = default_camera_config_name;
+  configFileName = "default.pfs";
   std::cout << configFileName << std::endl;
   framesGrabbed = false;
   totalFramesSaved = 0;
@@ -361,6 +361,10 @@ void MyCamera::UpdateSaveName(const char *name)
 void MyCamera::SetTrialStructure(int _structure)
 {
   trial_structure = _structure;
+}
+
+void MyCamera::ChangeCameraConfig(const char *path) {
+  configFileName = path;
 }
 
 void init_pylon()

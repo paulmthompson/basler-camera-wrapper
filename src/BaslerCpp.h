@@ -28,6 +28,7 @@ public:
   void mywrite(int write_dist, int start_pos,int thread_id);
   void resizeImage();
   void SetTrialStructure(int _structure);
+  void ChangeCameraConfig(const char *path);
 
   bool attached;
   bool acquisitionActive;

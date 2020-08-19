@@ -8,8 +8,6 @@ static constexpr int frame_buf_size = 100;
 
 static constexpr float default_frame_rate = 500.0;
 
-static std::string default_camera_config_name = "default.pfs";
-
 //static constexpr char ffmpeg_filepath[] = "ffmpeg";
 static constexpr char ffmpeg_filepath[] = "c:/Users/wanglab/Downloads/ffmpeg/bin/ffmpeg"; //intrinsic
 
