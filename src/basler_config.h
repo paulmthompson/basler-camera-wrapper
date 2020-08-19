@@ -8,8 +8,6 @@ static constexpr int frame_buf_size = 100;
 
 static constexpr float default_frame_rate = 500.0;
 
-static std::string default_save_path = "./";
-static std::string default_save_name = "output.mp4";
 static std::string default_camera_config_name = "default.pfs";
 
 //static constexpr char ffmpeg_filepath[] = "ffmpeg";

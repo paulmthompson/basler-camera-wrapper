@@ -31,6 +31,10 @@ extern "C" {
     cam->ChangeFolder(folder);
   }
 
+  void MyCamera_UpdateSaveName(MyCamera* cam, const char *name) {
+    cam->UpdateSaveName(name);
+  }
+
   bool MyCamera_GetFramesGrabbed(MyCamera* cam) {
     return cam->framesGrabbed;
   }

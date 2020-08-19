@@ -24,6 +24,7 @@ DLLOPT  void MyCamera_GrabFrames(MyCamera* cam);
 DLLOPT  void MyCamera_StartFFMPEG(MyCamera* cam);
 DLLOPT  void MyCamera_EndFFMPEG(MyCamera* cam);
 DLLOPT  void MyCamera_ChangeFolder(MyCamera* cam, const char *folder);
+DLLOPT  void MyCamera_UpdateSaveName(MyCamera* cam, const char *name);
 DLLOPT  bool MyCamera_GetFramesGrabbed(MyCamera* cam);
 DLLOPT  char* MyCamera_GetData(MyCamera* cam);
 DLLOPT  void MyCamera_GetDataBuffer(MyCamera* cam, uint16_t* data);

@@ -31,8 +31,8 @@ MyCamera::MyCamera(int cam_n)
   acquisitionActive = false;
   saveData=false;
   frameRate = default_frame_rate;
-  saveFilePath = default_save_path;
-  saveFileName = default_save_name;
+  saveFilePath = "./"
+  saveFileName = "output.mp4";
   _h = 480;
   _w = 640;
   num_cam = cam_n;
@@ -40,7 +40,7 @@ MyCamera::MyCamera(int cam_n)
   buf_id[1]=0;
 
   offset = 0;
-  
+
   img_to_display = (char*)calloc(_h * _w * num_cam * bytes_per_pixel, sizeof(char));
   leftover = (char*)calloc(_h * _w * num_cam * bytes_per_pixel, sizeof(char));
   mydata = (char*)calloc(_h * _w * num_cam * frame_buf_size * bytes_per_pixel, sizeof(char));
@@ -350,6 +350,11 @@ void MyCamera::EndFFMPEG()
 void MyCamera::ChangeFolder(const char *folder)
 {
   saveFilePath = folder;
+}
+
+void MyCamera::UpdateSaveName(const char *name)
+{
+  saveFileName = name;
 }
 
 void init_pylon()

@@ -24,6 +24,7 @@ public:
   void StartFFMPEG();
   void EndFFMPEG();
   void ChangeFolder(const char *folder);
+  void UpdateSaveName();
   void mywrite(int write_dist, int start_pos,int thread_id);
   void resizeImage();
 
