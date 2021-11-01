@@ -39,7 +39,7 @@ MyCamera::MyCamera(int cam_n)
   _h = 480;
   _w = 640;
   bytes_per_pixel = 1;
-  num_cam = cam_n; //This should be higher level
+  num_cam = cam_n; //Don't need this value
   buf_id[0]=0;
   buf_id[1]=0;
 
@@ -133,7 +133,28 @@ void MyCamera::ConnectBySerial(const char *myserial)
     }
 
     for (int i = 0; i < devices.size(); i++) {
-      std::cout << "Serial Number of opened Device is " << devices[i].GetSerialNumber() << std::endl;
+
+      if (devices[i].GetSerialNumber() == myserial) {
+        std::cout << "Matched serial number for " << devices[i].GetSerialNumber() << std::endl;
+
+        camera[0].Attach( tlFactory.CreateDevice( devices[ i ]));
+
+        if (camera[0].IsPylonDeviceAttached())
+        {
+          std::cout << "Using device " << camera[0].GetDeviceInfo().GetModelName() << std::endl;
+          attached = true;
+
+          camera[0].MaxNumBuffer = 50;
+          camera[0].Open(); // Need to access parameters
+
+          //Load values from configuration file
+          CFeaturePersistence::Load(configFileName.c_str(), &camera[0].GetNodeMap(), true);
+        } else {
+          std::cout << "Camera was not able to be initialized. Is one connected?" << std::endl;
+        }
+      } else {
+        std::cout << "Not matched serial number for " << devices[i].GetSerialNumber() << std::endl;
+      }
     }
   }
 }
