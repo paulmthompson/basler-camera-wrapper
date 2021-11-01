@@ -18,6 +18,7 @@ typedef struct MyCamera MyCamera;
 DLLOPT MyCamera* newMyCamera(int num_cam);
 
 DLLOPT  void MyCamera_Connect(MyCamera* cam);
+DLLOPT	void MyCamera_ConnectBySerial(MyCamera* cam, const char *myserial);
 DLLOPT  void MyCamera_StartAcquisition(MyCamera* cam);
 DLLOPT  void MyCamera_StopAcquisition(MyCamera* cam);
 DLLOPT  void MyCamera_GrabFrames(MyCamera* cam);

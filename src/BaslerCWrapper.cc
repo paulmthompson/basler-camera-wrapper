@@ -12,6 +12,9 @@ extern "C" {
   void MyCamera_Connect(MyCamera* cam) {
     cam->Connect();
   }
+  void MyCamera_ConnectBySerial(MyCamera* cam, const char *myserial) {
+    cam->ConnectBySerial(myserial);
+  }
   void MyCamera_StartAcquisition(MyCamera* cam) {
     cam->StartAcquisition();
   }

@@ -39,7 +39,7 @@ MyCamera::MyCamera(int cam_n)
   _h = 480;
   _w = 640;
   bytes_per_pixel = 1;
-  num_cam = cam_n;
+  num_cam = cam_n; //This should be higher level
   buf_id[0]=0;
   buf_id[1]=0;
 
@@ -114,6 +114,26 @@ void MyCamera::Connect()
       } else {
         std::cout << "Camera was not able to be initialized. Is one connected?" << std::endl;
       }
+    }
+  }
+}
+
+void MyCamera::ConnectBySerial(const char *myserial)
+{
+  if (!attached) {
+
+    // Get the transport layer factory.
+    CTlFactory& tlFactory = CTlFactory::GetInstance();
+
+    // Get all attached devices and exit application if no device is found.
+    DeviceInfoList_t devices;
+    if ( tlFactory.EnumerateDevices(devices) == 0 )
+    {
+      throw RUNTIME_EXCEPTION( "Not enough cameras present.");
+    }
+
+    for (int i = 0; i < devices.size(); i++) {
+      std::cout << "Serial Number of opened Device is " << devices[i].GetSerialNumber() << std::endl;
     }
   }
 }

@@ -18,6 +18,7 @@ public:
   ~MyCamera();
 
   void Connect();
+  void ConnectBySerial(const char *myserial);
   void StartAcquisition();
   void StopAcquisition();
   void GrabFrames();
