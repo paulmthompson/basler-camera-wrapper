@@ -34,8 +34,8 @@ MyCamera::MyCamera(int cam_n)
   saveFilePath = "./";
   saveFileName = "output.mp4";
   ffmpegPath = "ffmpeg";
-  ffmpegInputOptions = "-f rawvideo -pix_fmt gray16 -s";
-  ffmpegOutputOptions = "-i - -y -pix_fmt gray16 -compression_algo raw";
+  ffmpegInputOptions = "-f rawvideo -pix_fmt gray -s";
+  ffmpegOutputOptions = "-i - -y -pix_fmt nv12 -vcodec h264_nvenc";
   _h = 480;
   _w = 640;
   bytes_per_pixel = 1;
@@ -54,7 +54,7 @@ MyCamera::MyCamera(int cam_n)
   totalFramesSaved = 0;
 
   trialNum=0;
-  trial_structure = 1;
+  trial_structure = 0;
 
   #ifdef _WIN32
   AllocConsole();
@@ -189,7 +189,7 @@ void MyCamera::GrabFrames()
           //My impression is that shouldn't happen intermittently if the buffer is sufficiently large,
           //and therefore if it does happen, ffmpeg won't be able to keep up saving anyway and there will
           //be other problems to deal with
-          memcpy(mydata + _w*_h*bytes_per_pixel + _w*_h*true_pos*bytes_per_pixel, static_cast<char*> (ptrGrabResult->GetBuffer()),_w*_h*bytes_per_pixel);
+          memcpy(mydata + _w*_h*true_pos*bytes_per_pixel, static_cast<char*> (ptrGrabResult->GetBuffer()),_w*_h*bytes_per_pixel);
           nBuffersInQueue++;
           totalFramesSaved+=1;
         } else {
@@ -221,7 +221,7 @@ void MyCamera::GrabFrames()
 
         if (camera.RetrieveResult( 0, ptrGrabResult, TimeoutHandling_Return)) {
 
-          memcpy(mydata + _w*_h*bytes_per_pixel, static_cast<char*> (ptrGrabResult->GetBuffer()),_w*_h*bytes_per_pixel);
+          memcpy(mydata, static_cast<char*> (ptrGrabResult->GetBuffer()),_w*_h*bytes_per_pixel);
           nBuffersInQueue++;
         } else {
           keep_going = false;
