@@ -59,27 +59,13 @@ public:
   int _h;
   int _w;
   int bytes_per_pixel;
-  int num_cam;
 
   int trial_structure; //Flag if trial structure is being used
   int trialNum; //If a trial structure is being used
 
 private:
-  Pylon::CBaslerUsbInstantCamera camera[MAX_CAMERA];
-
-  //It is possible during multi-camera acquisition that, although frames are acquired synchronously,
-  //they are not received by the PC synchronously
-  //If this happens that there is an unequal frame count, that extra frame is placed in the leftholder
-  //structure and they are
-  char* leftover;
-  bool left_over_flag;
-
-  //Indicates the starting index in the ring buffer
-  int offset;
-
-  bool read_frame[MAX_CAMERA];
-  int buf_id[MAX_CAMERA];
-
+  Pylon::CBaslerUsbInstantCamera camera;
+  int offset; //Indicates the starting index in the ring buffer
   FILE* ffmpeg;
 };
 
